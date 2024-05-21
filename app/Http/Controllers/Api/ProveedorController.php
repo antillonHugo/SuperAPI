@@ -34,7 +34,7 @@ class ProveedorController extends Controller
     }
 
    /**
-     * Store a newly created resource in storage.
+     * se utiliza para guardar registros en la base de datos.
      */
     public function store(Request $request)
     {
