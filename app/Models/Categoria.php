@@ -18,8 +18,10 @@ class Categoria extends Model
     //nombre de los campos
     protected $fillable = ['nombre_categoria'];
 
+    public $timestamps = false; // Desactiva las marcas de tiempo
+
     //definimos la relación de uno a muchos con la tabla producto
-    public function productos(){
+    public function productosss(){
         return $this->hasMany(Producto::class);
     }
 }

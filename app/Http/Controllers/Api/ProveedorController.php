@@ -65,7 +65,7 @@ class ProveedorController extends Controller
             'proveedor_direccion'=>$request->proveedor_direccion
         ]);
 
-
+        //Después de crear el registro, el código verifica si la operación fue exitosa o no.
         if(!$proveedor){
             //prepara un array asociativo con un mensaje de error y un código de estado HTTP. llamado $data
             $data = [
@@ -77,6 +77,7 @@ class ProveedorController extends Controller
         }
 
         // Si el registro se creó con éxito y $proveedor no es falso, prepara un array con los datos del proveedor.
+        //El arreglo $data se crea para agrupar los datos relevantes que se enviarán como respuesta.
         $data = [
             'proveedor' => $proveedor,
             'status'    => 201,

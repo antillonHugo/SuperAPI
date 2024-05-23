@@ -1,10 +1,13 @@
 <?php
 //importamos los controladores
+
+use App\Http\Controllers\Api\CategoriaController;
+use App\Http\Controllers\Api\ProductoController;
 use App\Http\Controllers\Api\ProveedorController;
 use App\Http\Controllers\Api\UnidadmedidaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Database\Eloquent\Model;
+// use Illuminate\Database\Eloquent\Model;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -19,6 +22,17 @@ Route::post('/proveedores', [ProveedorController::class, 'store']);
 Route::put('/proveedores/{proveedor_id}',[ProveedorController::class,'update']);
 
 //rutas para unidades de medida
-//Route::post('/unidades',[UnidadmedidaController::class,'store']);
+Route::get('/unidades',[UnidadmedidaController::class,'index']);
+Route::post('/unidades',[UnidadmedidaController::class,'store']);
+
+//rutas para las categrias
+Route::get('/categorias',[CategoriaController::class,'index']);
+Route::post('/categorias',[CategoriaController::class,'store']);
+
+//rutas para los productos
+Route::get('/producto',[ProductoController::class,'index']);
+Route::post('/producto',[ProductoController::class,'store']);
+
+
 
 

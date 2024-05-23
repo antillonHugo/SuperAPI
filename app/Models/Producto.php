@@ -15,6 +15,9 @@ class Producto extends Model
     //llave primaria
     protected $primarykey = 'cod_producto';
 
+    // Desactiva las marcas de tiempo
+    public $timestamps = false;
+
     //nombre de los campos
     protected $fillable = ['nombre','descripcion','stock','cod_categoria','cod_unidadmedida'];
 

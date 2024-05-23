@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Unidadmedida extends Model
 {
     use HasFactory;
-/*
+
     //llava primaria
     protected $primarykey = 'cod_unidadmedida';
 
@@ -18,8 +18,10 @@ class Unidadmedida extends Model
     //campos de la tabla
     protected $fillable = ['unidad_medida'];
 
+    public $timestamps = false; // Desactiva las marcas de tiempo
+
     //definimos la relacion uno a muchos con la tabla producto
     public function productos(){
         return $this->hasMany(Producto::class);
-    }*/
+    }
 }

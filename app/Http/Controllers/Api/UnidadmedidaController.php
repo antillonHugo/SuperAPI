@@ -18,7 +18,7 @@ class UnidadmedidaController extends Controller
         //mostramos la lista de unidades de medida
         $unidades_medida = Unidadmedida::all();
 
-        if(!$unidades_medida){
+        if($unidades_medida->isEmpty()){
 
             $data = [
                 'message'=>'No se encontrarón registros',
@@ -27,6 +27,8 @@ class UnidadmedidaController extends Controller
 
             return response()->json($data,404);
         }
+
+        return response()->json($unidades_medida,200);
     }
 
     /*
@@ -49,7 +51,7 @@ class UnidadmedidaController extends Controller
 
         if($validator->fails()){
             $data = [
-                'message'   =>'Error al guardar el registro',
+                'message'   =>'Los campos son requeridos',
                 'error'     =>$validator->errors(),
                 'status'    =>400
             ];
@@ -57,15 +59,15 @@ class UnidadmedidaController extends Controller
             return response()->json($data,400);
         }
 
-        //si los campos estan correctos(llenos) medinate un array asociativo
-        //create es de eloquent
+        //crea un nuevo modelo Unidadmedida con los valores proporcionados en el arreglo asociativo.
         $unidades_medida = Unidadmedida::create([
             'unidad_medida' => $request->unidad_medida
         ]);
 
+        //Después de crear el registro, el código verifica si la operación fue exitosa o no.
         if(!$unidades_medida){
             $data = [
-                'message'=>'error al crear la unidad de medida',
+                'message'=>'error al crear el registro',
                 'status'=>500,
             ];
 
@@ -73,6 +75,7 @@ class UnidadmedidaController extends Controller
         }
 
         // Si el registro se creó con éxito y $unidades_medida no es falso, prepara un array con los datos de las unidades_medida.
+        //El arreglo $data se crea para agrupar los datos relevantes que se enviarán como respuesta.
         $data = [
             'unidad_medida' => $unidades_medida,
             'status'    => 201,

@@ -19,7 +19,7 @@ class Entrada extends Model
     protected $fillable = ['cod_producto','cantidad','fecha_ingreso'];
 
     //definimos la relación entre la tabla producto y entrada la relación es de uno a muchos
-    public function productos(){
+    public function productoss(){
         return $this->hasMany(Producto::class);
     }
 
