@@ -18,4 +18,10 @@ class Proveedor extends Model
     //definismo los campos que seran alterados
     // Especifica los campos que pueden ser asignados masivamente
     protected $fillable = ['proveedor_nombre','proveedor_telefono','proveedor_direccion'];
+
+    //relacion de muchos a muhos entre la tabla producto y proveedores
+    public function productos()
+    {
+        return $this->belongsToMany(Producto::class, 'producto_proveedor');
+    }
 }

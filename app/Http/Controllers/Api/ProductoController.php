@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Categoria;
+use App\Models\Entrada;
 use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -23,7 +25,6 @@ class ProductoController extends Controller
                 'message' => 'No se encuantran registros para mostrar',
                 'status'  => 404
             ];
-
             return response()->json($data,404);
         }
 
@@ -111,6 +112,8 @@ class ProductoController extends Controller
     public function edit(Producto $producto)
     {
         //
+
+
     }
 
     /**
@@ -128,4 +131,24 @@ class ProductoController extends Controller
     {
         //
     }
+
+    //filtramos los productos por categoría
+    /*public function productosPorCategoria($cod_categoria){
+
+        $productosPorCategoria = Producto::with('categoria')->where('cod_categoria', $cod_categoria)->get();
+
+        return response()->json($productosPorCategoria,200);
+    }*/
+
+    //filtrar los productos
+    public function filtrarPorProveedor(){
+
+        $producto = Producto::where('cod_categoria', 3)->first();
+
+        return response()->json($producto,200);
+    }
+
+
+
+
 }

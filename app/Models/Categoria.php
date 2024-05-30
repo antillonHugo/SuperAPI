@@ -13,7 +13,7 @@ class Categoria extends Model
     protected $table = 'categoria';
 
     //llave primaria
-    protected $id = 'cod_categoria';
+    protected $primaryKey = 'cod_categoria';
 
     //nombre de los campos
     protected $fillable = ['nombre_categoria'];
@@ -21,7 +21,10 @@ class Categoria extends Model
     public $timestamps = false; // Desactiva las marcas de tiempo
 
     //definimos la relación de uno a muchos con la tabla producto
-    public function productosss(){
+    //En el modelo Categoria, definirás una relación “uno a muchos” (many-to-one)
+    //con el modelo Producto. Esto significa que una categoría puede tener varios productos asociados.
+    //OJO No necesitas especificar explícitamente la clave foránea en este caso
+    public function productos(){
         return $this->hasMany(Producto::class);
     }
 }

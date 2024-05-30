@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('entrada', function (Blueprint $table) {
-            $table->id('cod_entrada');
+        Schema::create('producto_proveedor', function (Blueprint $table) {
+            $table->id('cod_producto_proveedor');
             $table->unsignedBigInteger('cod_producto');//clave foranea
+            $table->unsignedBigInteger('proveedor_id');
             $table->decimal('cantidad');
             $table->dateTime('fecha_ingreso');
             $table->foreign('cod_producto')->references('cod_producto')->on('producto');
+            $table->foreign('proveedor_id')->references('proveedor_id')->on('proveedor');
         });
-
     }
 
     /**
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('entrada');
+        Schema::dropIfExists('producto_proveedor');
     }
 };
