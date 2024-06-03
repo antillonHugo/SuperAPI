@@ -10,7 +10,7 @@ use App\Http\Controllers\Api\EntradaController;
 use App\Http\Controllers\Api\UsuarioController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\CommentController;
-
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -55,11 +55,15 @@ Route::get('/contacto',[ContactoController::class,'index']);
 
 //post
 Route::get('/post',[PostController::class,'index']);
-Route::get('/post/{cod_post}',[PostController::class,'mostrarCommentPorId']);
+Route::get('/post/{cod_post}',[PostController::class,'show']);
+//Route::get('/post/relation/comment',[PostController::class,'mostrarPost_y_sus_comentarios']);
+Route::get('/post/relation/commentpostid/{cod_post}',[PostController::class,'mostrarCommentPorPostID']);
 Route::get('/post/filter/{cod_post}',[PostController::class,'filtraCommentPorId']);
 
 //comment
 Route::get('/comment',[CommentController::class,'index']);
+Route::get('/comment/{cod_comment}',[CommentController::class,'show']);
+Route::get('/comment/publicacion/{cod_comment}',[CommentController::class,'obtener_publicacion_comentarioId']);
 
 
 

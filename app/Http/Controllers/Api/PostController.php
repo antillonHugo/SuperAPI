@@ -19,19 +19,47 @@ class PostController extends Controller
         return response()->json($post,200);
     }
 
+    public function show($idpost){
 
-    public function mostrarCommentPorId($id){
+        $post = Post::find($idpost);
+
+        if(!$post){
+            $data = [
+                'message'=>'no se encontraron datos',
+                'status'=>404
+            ];
+
+            return response()->json($data,404);
+        }
+
+        $data = [
+            'post'      => $post,
+            'status'    =>200
+        ];
+
+        return response()->json($data,200);
+    }
+/*
+    public function mostrarPost_y_sus_comentarios(){
+        $postRelacion = Post::find(1)->comments;
+        return response()->json($postRelacion);
+    }*/
+
+    //obtenemos todos los comentarios relacionados a un post en especifico
+    public function mostrarCommentPorPostID($id){
 
         //obteneos un JSON con los todos los comentarios asociados a esa publicación mediante un ID .
-        $commnetId = Post::find($id)->comments;
+        $publicacion = Post::with('comments')->findOrFail($id);
 
-        return response()->json($commnetId,200);
+        return response()->json($publicacion,200);
     }
 
+    //buscamos la publicacion(Post) que posea el codigo que sea igual
+    // a lo que tiene como $idpost y la columna cod_comment sea igual a 4
+    //agregando más restricciones a la consulta de relación
+    public function filtraCommentPorId($idpost){
 
-    public function filtraCommentPorId($id){
-
-        $comment = Post::find($id)->comments()
+        $comment = Post::find($idpost)->comments()
                     ->where('cod_comment', 4)
                     ->first();
 
@@ -55,13 +83,13 @@ class PostController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
+    /*
+      Display the specified resource.
+
     public function show(Post $post)
     {
-        //
-    }
+
+    } */
 
     /**
      * Show the form for editing the specified resource.
